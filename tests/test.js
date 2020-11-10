@@ -55,8 +55,5 @@ describe("Mock Provider", () => {
     const contract = new ethers.Contract(address, abi, mockProvider);
     const supply = ethers.utils.formatEther(await contract.totalSupply());
     expect(supply).to.eql("1234.0");
-    console.log(
-      await contract.balanceOf("0xdAC17F958D2ee523a2206206994597C13D831ec7")
-    );
   });
 });
