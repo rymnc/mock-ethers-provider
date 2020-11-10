@@ -35,8 +35,8 @@ describe("Mock Provider", () => {
 
   it("Should stub a function", () => {
     mockProvider.setMockContract(address, abi);
-    mockProvider.stub(address, "totalSupply()", "0x1234");
-    const map = mockProvider.stub(address, "MAX_UINT()", "0x721a");
+    mockProvider.stub(address, "totalSupply", "0x1234");
+    const map = mockProvider.stub(address, "MAX_UINT", "0x721a");
     expect(map.mockedFunctions).to.eql(testMap);
   });
 
@@ -49,7 +49,7 @@ describe("Mock Provider", () => {
     mockProvider.setMockContract(address, abi);
     mockProvider.stub(
       address,
-      "totalSupply()",
+      "totalSupply",
       ethers.utils.parseEther("1234")
     );
     const contract = new ethers.Contract(address, abi, mockProvider);
@@ -61,7 +61,7 @@ describe("Mock Provider", () => {
     mockProvider.setMockContract(address, abi);
     mockProvider.stub(
       address,
-      "balanceOf(address)",
+      "balanceOf",
       ethers.utils.parseEther("1234")
     );
     const contract = new ethers.Contract(address, abi, mockProvider);
