@@ -1,0 +1,30 @@
+{
+  "name": "mock-ethers-provider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "prettier --write .",
+    "test": "mocha tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaryamannchallani/mock-ethers-provider.git"
+  },
+  "author": "Aaryamann Challani <aaryamannchallani7@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aaryamannchallani/mock-ethers-provider/issues"
+  },
+  "homepage": "https://github.com/aaryamannchallani/mock-ethers-provider#readme",
+  "dependencies": {
+    "@ethersproject/abi": "^5.0.7",
+    "@ethersproject/providers": "^5.0.14",
+    "chai": "^4.2.0",
+    "ethers": "^5.0.19",
+    "mocha": "^8.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  }
+}
