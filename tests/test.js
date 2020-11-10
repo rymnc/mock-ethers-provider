@@ -56,4 +56,18 @@ describe("Mock Provider", () => {
     const supply = ethers.utils.formatEther(await contract.totalSupply());
     expect(supply).to.eql("1234.0");
   });
+
+  it("Should stub a function with 0 args", async () => {
+    mockProvider.setMockContract(address, abi);
+    mockProvider.stub(
+      address,
+      "balanceOf(address)",
+      ethers.utils.parseEther("1234")
+    );
+    const contract = new ethers.Contract(address, abi, mockProvider);
+    const balance = ethers.utils.formatEther(
+      await contract.balanceOf("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    );
+    expect(balance).to.eql("1234.0");
+  });
 });
