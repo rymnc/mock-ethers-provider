@@ -7,9 +7,7 @@
     "lint": "prettier --write .",
     "test": "mocha tests/test.js"
   },
-  {
-    "files": ["lib/"]
-  },
+    "files": ["lib/"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aaryamannchallani/mock-ethers-provider.git"
