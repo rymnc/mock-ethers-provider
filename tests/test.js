@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { MockProvider } = require("../lib/index.js");
 const { abi, address } = require("./artifacts/TetherToken.json");
-const { testMap } = require('./mockedObjects')
+const { testMap } = require("./mockedObjects");
 
 describe("Mock Provider", () => {
   let mockProvider;
@@ -20,7 +20,9 @@ describe("Mock Provider", () => {
 
   it("Should set a contract to be mocked", () => {
     const map = mockProvider.setMockContract(address, abi);
-    expect(map).to.eql(new Map().set(address, { abi, mockedFunctions: new Map() }));
+    expect(map).to.eql(
+      new Map().set(address, { abi, mockedFunctions: new Map() })
+    );
   });
 
   it("Should get the function signature", () => {
@@ -29,9 +31,9 @@ describe("Mock Provider", () => {
   });
 
   it("Should stub a function", () => {
-	  mockProvider.setMockContract(address, abi)
-  	mockProvider.stub(address, 'totalSupply()', '0x1234')
-	const map =   mockProvider.stub(address, 'MAX_UINT()', '0x721a')
-  	expect(map.mockedFunctions).to.eql(testMap)
-  })
+    mockProvider.setMockContract(address, abi);
+    mockProvider.stub(address, "totalSupply()", "0x1234");
+    const map = mockProvider.stub(address, "MAX_UINT()", "0x721a");
+    expect(map.mockedFunctions).to.eql(testMap);
+  });
 });
