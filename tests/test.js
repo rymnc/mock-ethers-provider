@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const { MockProvider } = require("../lib/index.js");
 const { abi, address } = require("./artifacts/TetherToken.json");
 const { testMap } = require("./mockedObjects");
-const ethers = require('ethers')
+const ethers = require("ethers");
 describe("Mock Provider", () => {
   let mockProvider;
 
@@ -21,7 +21,10 @@ describe("Mock Provider", () => {
   it("Should set a contract to be mocked", () => {
     const map = mockProvider.setMockContract(address, abi);
     expect(map).to.eql(
-      new Map().set(address, { interface: new ethers.utils.Interface(abi), mockedFunctions: new Map() })
+      new Map().set(address, {
+        interface: new ethers.utils.Interface(abi),
+        mockedFunctions: new Map(),
+      })
     );
   });
 
@@ -43,11 +46,17 @@ describe("Mock Provider", () => {
   });
 
   it("Should receive mock output", async () => {
-  	mockProvider.setMockContract(address, abi)
-	mockProvider.stub(address, "totalSupply()", ethers.utils.parseEther("1234"))
-	const contract = new ethers.Contract(address, abi, mockProvider)
-	const supply = ethers.utils.formatEther(await contract.totalSupply())
-		expect(supply).to.eql("1234.0")
-	
-  })
+    mockProvider.setMockContract(address, abi);
+    mockProvider.stub(
+      address,
+      "totalSupply()",
+      ethers.utils.parseEther("1234")
+    );
+    const contract = new ethers.Contract(address, abi, mockProvider);
+    const supply = ethers.utils.formatEther(await contract.totalSupply());
+    expect(supply).to.eql("1234.0");
+    console.log(
+      await contract.balanceOf("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    );
+  });
 });
