@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const { MockProvider } = require("../lib/index.js");
 const { abi, address } = require("./artifacts/TetherToken.json");
 const { testMap } = require("./mockedObjects");
-
+const ethers = require('ethers')
 describe("Mock Provider", () => {
   let mockProvider;
 
@@ -21,7 +21,7 @@ describe("Mock Provider", () => {
   it("Should set a contract to be mocked", () => {
     const map = mockProvider.setMockContract(address, abi);
     expect(map).to.eql(
-      new Map().set(address, { abi, mockedFunctions: new Map() })
+      new Map().set(address, { interface: new ethers.utils.Interface(abi), mockedFunctions: new Map() })
     );
   });
 
@@ -36,4 +36,18 @@ describe("Mock Provider", () => {
     const map = mockProvider.stub(address, "MAX_UINT()", "0x721a");
     expect(map.mockedFunctions).to.eql(testMap);
   });
+
+  it("Should restore the mocks to default", () => {
+    mockProvider.restore();
+    expect(mockProvider.mockedContracts.size).to.eql(0);
+  });
+
+  it("Should receive mock output", async () => {
+  	mockProvider.setMockContract(address, abi)
+	mockProvider.stub(address, "totalSupply()", ethers.utils.parseEther("1234"))
+	const contract = new ethers.Contract(address, abi, mockProvider)
+	const supply = ethers.utils.formatEther(await contract.totalSupply())
+		expect(supply).to.eql("1234.0")
+	
+  })
 });
