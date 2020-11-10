@@ -45,7 +45,7 @@ describe("Mock Provider", () => {
     expect(mockProvider.mockedContracts.size).to.eql(0);
   });
 
-  it("Should receive mock output", async () => {
+  it("Should stub a function with 0 args", async () => {
     mockProvider.setMockContract(address, abi);
     mockProvider.stub(
       address,
@@ -57,7 +57,7 @@ describe("Mock Provider", () => {
     expect(supply).to.eql("1234.0");
   });
 
-  it("Should stub a function with 0 args", async () => {
+  it("Should stub a function with >1 args", async () => {
     mockProvider.setMockContract(address, abi);
     mockProvider.stub(
       address,
